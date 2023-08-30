@@ -1,3 +1,5 @@
+[PCCP 모의고사 1회 사이트](https://school.programmers.co.kr/learn/courses/15008/15008-pccp-%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC-1%ED%9A%8C)
+
 # 문제 설명
 <details>
   <summary> 1. 외톨이 알파벳 </summary>
@@ -42,7 +44,7 @@
 > - `외톨이 알파벳`인 z, b를 알파벳순으로 이어 붙여 문자열을 만들면 `bz`가 됩니다.<br/><br/>
 </details>
 
-풀이 시간 : `` [`문제 풀이`](#1-외톨이-알파벳-풀이)
+풀이 시간 : `17:32` [`문제 풀이`](#1-외톨이-알파벳-풀이)
 
 <details>
   <summary> 2. 체육대회 </summary>
@@ -170,8 +172,28 @@
 # 풀이
 
   - ### 1. 외톨이 알파벳 풀이
-    SAMPLE MESSAGE<br/><br/>
-    
+    SAMPLE MESSAGE
+    - #### TIPS
+      <details>
+        <summary>아스키 코드로 배열 만들기</summary>
+
+        >SAMPLE MESSAGE
+      </details>
+      <details>
+        <summary>문자열 포매팅</summary>
+
+        >SAMPLE MESSAGE
+      </details>
+      <details>
+        <summary>정규 표현식</summary>
+
+        >SAMPLE MESSAGE
+      </details>
+      <details>
+        <summary>lambda 표현식</summary>
+
+        >SAMPLE MESSAGE
+      </details>
   - ### 2. 체육대회 풀이
     SAMPLE MESSAGE<br/><br/>
     
