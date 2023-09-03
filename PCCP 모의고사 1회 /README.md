@@ -80,7 +80,7 @@
 > - 1번 학생이 2번 종목을, 2번 학생이 1번 종목의 대표로 참가하는 경우에 대표들의 해당 종목에 대한 능력치의 합이 최대가 되며, 이는 60입니다.<br/><br/>
 </details>
 
-풀이 시간 : `` [`문제 풀이`](#2-체육대회-풀이)
+풀이 시간 : `33:19` [`문제 풀이`](#2-체육대회-풀이)
 
 <details>
   <summary> 3. 유전법칙 </summary>
@@ -172,27 +172,147 @@
 # 풀이
 
   - ### 1. 외톨이 알파벳 풀이
-    SAMPLE MESSAGE
+    알파벳 리스트를 만들어 정규식을 이용하여 간단하게 확인할 수 있다.
+    - #### 생각할 점
+      `input_string`을 기준으로 외톨이 글자가 있는 지 없는 지 확인하려 할 수 있는데, `input_string`은 최대 2600자까지 들어오므로 알파벳을 기준으로 했을 때보다 오히려 훨씬 많은 시간이 걸릴 수 있다.<br/><br/>
+      `input_string`을 수정할 경우 외톨이 알파벳을 잘못 가져올 수 있으므로 하지 않는 것이 좋다.
     - #### TIPS
       <details>
         <summary>아스키 코드로 배열 만들기</summary>
 
-        >SAMPLE MESSAGE
+        > - javascript
+        >   ```
+        >   Array.from({ length: 26 }, (v, i) => String.fromCharCode(i + 65)) //대문자 알파벳 리스트 생성(1)
+        >   Array(26).fill().map((v, i) => String.fromCharCode(i + 65)) //대문자 알파벳 리스트 생성(2)
+        >   
+        >   Array.from({ length: 26 }, (v, i) => String.fromCharCode(i + 97)) //소문자 알파벳 리스트 생성(1)
+        >   Array(26).fill().map((v, i) => String.fromCharCode(i + 97)) //소문자 알파벳 리스트 생성(2)
+        >   ```
+        > - python3
+        >   ```
+        >   list(string.ascii_uppercase) # string에 내재된 함수를 이용하여 대문자 알파벳 리스트 생성
+        >   list(map(chr, range(65, 91))) # 대문자 알파벳 리스트 생성
+        >   
+        >   list(string.ascii_lowercase) # string에 내재된 함수를 이용하여 소문자 알파벳 리스트 생성
+        >   list(map(chr, range(97, 123))) # 소문자 알파벳 리스트 생성
+        >   ```
       </details>
       <details>
         <summary>문자열 포매팅</summary>
 
-        >SAMPLE MESSAGE
+        > - javascript
+        >   ```
+        >   //기본 포매팅
+        >   "{0}, {1}".format(val0, val1)
+        >   
+        >   //format 함수 이용
+        >   String.format("{0} + {1} = {2}", val0, val1, val2)
+        >   
+        >   //정규 표현식 이용
+        >   "%자료형종류 + %자료형종류 = %자료형종류", val0, val1, val2
+        >   
+        >   //ES6 템플릿 문자열과 백틱을 이용한 문자열 포매팅
+        >   `${val0} + ${val1} + ${val2} = ${val3}`
+        >   ```
+        > - python3
+        >   ```
+        >   # %포매팅
+        >   "%자료형종류 %자료형종류" %(val0, val1)
+        >   
+        >   # format 함수 이용
+        >   "{0}{1}".format(val0,val1) #0번째에 N의 자리 정수로 값을 고정시키고 싶을 경우 {0:0Nd}
+        >   
+        >   #f-string 문법
+        >   f'{매개변수}로 치환 가능'
+        >   ```
+        > - 공통 참고 사항
+        >
+        > |%자료형종류|설명|비고|
+        > |:---:|:---:|:---:|
+        > |%s|문자열|-|
+        > |%d|정수|%0Nd 의 경우 N자리의 정수|
+        > |%f|실수|%0.Nf 의 경우 소수점 N자리의 실수|
+        > |%o|8진수|-|
+        > |%x|16진수|-|
       </details>
       <details>
         <summary>정규 표현식</summary>
 
-        >SAMPLE MESSAGE
+        > - javascript
+        >   ```
+        >   //정규 표현식을 나타내는 3가지 방법
+        >   
+        >   /정규표현식/flag
+        >   new RegExp("정규표현식", "flag")
+        >   new RegExp(/정규표현식/, "flag")
+        >   ```
+        > - python3
+        >   ```
+        >   import re
+        >   
+        >   re.compile('정규표현식', flag)
+        >   ```
+        > - 공통 참고 사항
+        >
+        > |메타문자|설명|
+        > |:---:|:---|
+        > |^x|문자열이 x로 시작|
+        > |x$|문자열의 끝이 x로 종료|
+        > |.x|x로 종료|
+        > |x+|x가 한 번 이상 문자열에 존재|
+        > |x?|x가 존재할 수도, 않을 수도 있음|
+        > |x*|x가 0번 이상 문자열에 존재|
+        > |x\|y|문자열에 x혹은 y존재|
+        > |(x)|x를 그룹으로 처리|
+        > |(x)(y)|순서에 맞게 x, y를 각 그룹의 데이터로 관리|
+        > |(x)(?:y)|그룹들의 집합에 대한 예외 표현|
+        > |x{n}|x가 n번 반복됨|
+        > |x{n,}|x가 n번 이상 반복됨|
+        > |x{n,m}|x가 n번 이상 m번 이하 반복됨|
+        > |[xy]|x와 y 중 하나|
+        > |[^xy]|x와 y 제외|
+        > |[x-z]|x~z 사이의 문자|
+        > |\^|^를 문자로 사용함|
+        > |\b|문자와 공백 사이의 문자|
+        > |\B|문자와 공백 사이가 아닌 문자|
+        > |\d|정수|
+        > |\D|숫자가 아닌 문자|
+        > |\s|공백 문자|
+        > |\S|공백이 아닌 문자|
+        > |\t|탭 문자 의미|
+        > |\v|수직 탭 의미|
+        > |\w|알파벳, 숫자, 공백 중 한 문자|
+        > |\W|알파벳, 숫자, 공백이 아닌 문자|<br/><br/>
+        >
+        > |FLAG|의미|
+        > |:---:|:---|
+        > |g|대상 문자열 내에서 모든 패턴을 검색|
+        > |i|대상 문자열에 대해 대/소문자를 식별하지 않음|
+        > |m|대상 문자열이 다중 라인의 문자열인 경우에도 검색|
       </details>
       <details>
-        <summary>lambda 표현식</summary>
+        <summary>함수 표현식</summary>
 
-        >SAMPLE MESSAGE
+        > - javascript
+        >   ```
+        >   // 기존 함수
+        >   function (input) => {
+        >   return ''
+        >   }
+        >
+        >   // 화살표 함수
+        >   (input) => '';
+        >   ```
+        > - python3
+        >   ```
+        >   # 기존 함수
+        >   def function_name(input) :
+        >     return '';
+        >
+        >   # lambda 함수
+        >   lambda input : 표현식, 범위
+        >   #ex ) map(lambda x: x ** 2, range(5))
+        >   ```
       </details>
   - ### 2. 체육대회 풀이
     SAMPLE MESSAGE<br/><br/>
