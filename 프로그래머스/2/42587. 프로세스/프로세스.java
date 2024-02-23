@@ -1,38 +1,35 @@
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 class Solution {
     public int solution(int[] priorities, int location) {
-        if (priorities == null || location > priorities.length) {
-            return 0;
+        int answer = 0;
+        int l = location;
+
+        Queue<Integer> que = new LinkedList<Integer>();
+        for(int i : priorities){
+            que.add(i);
         }
 
-        Queue<Integer> arr = new LinkedList<>();
-        Arrays.stream(priorities).forEach(x -> arr.add(x));
+        Arrays.sort(priorities);
+        int size = priorities.length-1;
 
-        int max = Arrays.stream(priorities).max().getAsInt();
 
-        int cnt = 0;
-        int idx = 0;
-        while (!arr.isEmpty()) {
-            while (!arr.contains(max)) {
-                max --;
+
+        while(!que.isEmpty()){
+            Integer i = que.poll();
+            if(i == priorities[size - answer]){
+                answer++;
+                l--;
+                if(l <0)
+                    break;
+            }else{
+                que.add(i);
+                l--;
+                if(l<0)
+                    l=que.size()-1;
             }
-
-            int data = arr.remove();
-            if (data == max) {
-                cnt++;
-                arr.add(0);
-                
-                if (idx % priorities.length == location) return cnt;
-            } else {
-                arr.add(data);
-            }
-
-            idx++;
         }
 
-        return cnt;
+        return answer;
     }
 }
