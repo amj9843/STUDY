@@ -16,7 +16,7 @@ class Solution {
         replaceList.put("nine", "9");
 
         for (String key : replaceList.keySet()) {
-            s = s.replaceAll(key, replaceList.get(key));
+            s = s.replace(key, replaceList.get(key));
         }
 
         return Integer.parseInt(s);
