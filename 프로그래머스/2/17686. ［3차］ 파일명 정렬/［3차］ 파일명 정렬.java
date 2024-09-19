@@ -2,8 +2,6 @@ import java.util.*;
 
 class Solution {
     public String[] solution(String[] files) {
-        String[] answer = {};
-  
         Arrays.sort(files, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
