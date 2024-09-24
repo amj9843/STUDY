@@ -11,7 +11,7 @@ class Solution {
         while(left <= right){
             int mid = (left + right) / 2;
             
-            if(getRemovedRockCnt(rocks, mid, distance) <= n){
+            if(getRemovedCount(rocks, mid, distance) <= n){
                 answer = mid;
                 left = mid + 1;
             } else {
@@ -22,7 +22,7 @@ class Solution {
         return answer;
     }
     
-    public int getRemovedRockCnt(int[] rocks, int mid, int distance){
+    public int getRemovedCount(int[] rocks, int mid, int distance){
         int before = 0; 
         int end = distance;
         
